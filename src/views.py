@@ -23,7 +23,11 @@ class BaseHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(filename)
         self.response.out.write(template.render(template_values))
 
-
+class Welcome(BaseHandler):
+    def get(self):
+        self.render_template('wb.html', {})
+        
+        
 class ShowAds(BaseHandler):
     
     def get(self):
@@ -75,5 +79,9 @@ class DeleteAd(BaseHandler):
         key = ndb.Key('Ads', iden)
         key.delete()
         return webapp2.redirect('/')
+    
 
+class SearchRes(BaseHandler):
+    def get(self):
+        self.render_template('search.html', {})
 
